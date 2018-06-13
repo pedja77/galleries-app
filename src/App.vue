@@ -1,19 +1,23 @@
 <template>
   <div id="app">
     <nav-bar />
-    <!-- <router-view /> -->
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import NavBar from './components/NavBar.vue'
 import GalleriesApp from './pages/GalleriesApp.vue'
+import AppLogin from './pages/AppLogin.vue'
+import AppRegister from './pages/AppRegister.vue'
 
 export default {
   name: 'app',
   components: {
     NavBar,
-    GalleriesApp
+    GalleriesApp,
+    AppLogin,
+    AppRegister
   }
 }
 </script>

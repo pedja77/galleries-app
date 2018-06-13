@@ -1,6 +1,6 @@
 <template>
   <div>
-    GalleriesApp
+    Login
   </div>
 </template>
 
@@ -10,4 +10,5 @@ export default {
 }
 </script>
 
-
+<style>
+</style>
