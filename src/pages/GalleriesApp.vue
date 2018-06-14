@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="showGalleries">
     <ul class="list-unstyled">
       <li class="list-item" v-for="(gallery, index) in galleries" :key="index">
         <div class="row mb-4">
@@ -18,6 +18,9 @@
     </ul>
     <button class="btn btn-primary" @click="loadMore" v-if="nextPageUrl">Load More</button>
   </div>
+  <div v-else>
+    <p>Currently, there are no galleries.</p>
+  </div>
 </template>
 
 <script>
@@ -28,7 +31,8 @@ export default {
     return {
       galleries: [],
       nextPageUrl: '',
-      page: 1
+      page: 1,
+      showGalleries: false
     }
   },
   methods: {
@@ -46,10 +50,14 @@ export default {
   created() {
     GalleryService.getAllGalleries()
       .then((response) => {
-        console.log(response.data.data)
-        this.galleries = response.data.data
-        this.nextPageUrl = response.data.next_page_url
-        this.page = response.data.current_page
+        if (response.data.data) {
+          console.log(response.data.data)
+          this.galleries = response.data.data
+          this.nextPageUrl = response.data.next_page_url
+          this.page = response.data.current_page
+          this.showGalleries = true
+        }
+        
       })
   }
 }
