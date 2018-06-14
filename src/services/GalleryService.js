@@ -7,8 +7,9 @@ class GalleryService {
     })
   }
 
-  getAllGalleries() {
-    return this.client.get("/galleries")
+  getAllGalleries(page='') {
+
+    return this.client.get(`/galleries?page=${page}`)
   }
 
   // addMovie(movie) {
