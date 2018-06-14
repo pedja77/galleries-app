@@ -7,8 +7,12 @@
             <img :src="gallery.first_gallery_item.image_link" width="100%" />
           </div>
           <div class="col-8">
-            <h4>{{ gallery.title }}</h4>
-            <p>Author: {{ gallery.user.first_name }} {{ gallery.user.last_name }}</p>
+            <h4>
+              <router-link :to="{name: 'gallery', params: {id: gallery.id}}">{{ gallery.title }}</router-link>
+            </h4>
+            <p>Author:
+              <router-link to="#">{{ gallery.user.first_name }} {{ gallery.user.last_name }}</router-link>
+            </p>
             <p>
               <small>Created at</small> {{ gallery.created_at }}
             </p>
@@ -25,6 +29,7 @@
 
 <script>
 import { GalleryService } from '../services/GalleryService.js'
+import moment from 'moment'
 
 export default {
   data() {

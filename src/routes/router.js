@@ -4,6 +4,7 @@ import VueRouter from "vue-router"
 import GalleriesApp from "../pages/GalleriesApp.vue"
 import AppLogin from "../pages/AppLogin.vue"
 import AppRegister from "../pages/AppRegister.vue"
+import AppGallery from "../pages/AppGallery.vue"
 
 //import { requiresAuth, guestOnly } from "./guards"
 
@@ -47,15 +48,15 @@ const router = new VueRouter({
       // meta: {
       //   guestOnly: true
       // }
+    },
+    {
+      path: "/galleries/:id",
+      component: AppGallery,
+      name: "gallery"
+      // meta: {
+      //   requiresAuth: true
+      // }
     }
-    // {
-    //   path: "/movies/:id",
-    //   component: AppMovie,
-    //   name: "movie",
-    //   meta: {
-    //     requiresAuth: true
-    //   }
-    // }
   ]
 })
 

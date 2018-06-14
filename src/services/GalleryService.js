@@ -7,9 +7,12 @@ class GalleryService {
     })
   }
 
-  getAllGalleries(page='') {
-
+  getAllGalleries(page = "") {
     return this.client.get(`/galleries?page=${page}`)
+  }
+
+  getGallery(id) {
+    return this.client.get(`/galleries/${id}`)
   }
 
   // addMovie(movie) {
