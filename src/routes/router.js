@@ -5,8 +5,9 @@ import GalleriesApp from "../pages/GalleriesApp.vue"
 import AppLogin from "../pages/AppLogin.vue"
 import AppRegister from "../pages/AppRegister.vue"
 import AppGallery from "../pages/AppGallery.vue"
+import UserGalleries from "../pages/UserGalleries.vue"
 
-//import { requiresAuth, guestOnly } from "./guards"
+import { requiresAuth, guestOnly } from "./guards"
 
 Vue.use(VueRouter)
 
@@ -28,10 +29,15 @@ const router = new VueRouter({
     {
       path: "/login",
       component: AppLogin,
-      name: "login"
-      // meta: {
-      //   guestOnly: true
-      // }
+      name: "login",
+      meta: {
+        guestOnly: true
+      }
+    },
+    {
+      path: "/authors/:id",
+      component: UserGalleries,
+      name: "author-galleries"
     },
     // {
     //   path: "/add",
@@ -44,10 +50,10 @@ const router = new VueRouter({
     {
       path: "/register",
       component: AppRegister,
-      name: "register"
-      // meta: {
-      //   guestOnly: true
-      // }
+      name: "register",
+      meta: {
+        guestOnly: true
+      }
     },
     {
       path: "/galleries/:id",
@@ -60,16 +66,16 @@ const router = new VueRouter({
   ]
 })
 
-// router.beforeEach((to, from, next) => {
-//   Promise.resolve(to)
-//     .then(requiresAuth)
-//     .then(guestOnly)
-//     .then(() => {
-//       next()
-//     })
-//     .catch(redirect => {
-//       next(redirect)
-//     })
-// })
+router.beforeEach((to, from, next) => {
+  Promise.resolve(to)
+    .then(requiresAuth)
+    .then(guestOnly)
+    .then(() => {
+      next()
+    })
+    .catch(redirect => {
+      next(redirect)
+    })
+})
 
 export default router

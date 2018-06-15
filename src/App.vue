@@ -17,6 +17,7 @@ import AppRegister from './pages/AppRegister.vue'
 import NavReg from './components/NavReg.vue'
 
 import { mapGetters } from 'vuex'
+import { authService } from "./services/Auth.js"
 
 
 export default {
@@ -30,7 +31,15 @@ export default {
     
   },
   computed: {
-    ...mapGetters(['getIsAuthenticated'])
+    ...mapGetters(['getIsAuthenticated']),
+    isAuthenticated() {
+      return authService.isAuthenticated()
+    }
+  },
+  created() {
+    if(window.localStorage.getItem('loginToken')) {
+      this.$store.commit('setIsAuthenticated', true)
+    }
   }
 
 }

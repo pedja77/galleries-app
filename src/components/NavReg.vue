@@ -9,15 +9,23 @@
         <router-link class="nav-item nav-link" to="/galleries">All Galleries</router-link>
         <router-link class="nav-item nav-link" to="#">My Galleries</router-link>
         <router-link class="nav-item nav-link" to="#">Create New Gallery</router-link>
-        <router-link class="nav-item nav-link" to="#">Logout</router-link>
+        <a class="nav-item nav-link" href="#" @click="logout">Logout</a>
       </div>
     </div>
   </nav>
 </template>
 
 <script>
-export default {
+import { authService } from '../services/Auth.js'
 
+export default {
+  methods: {
+    logout() {
+      authService.logout()
+      this.$router.push("/galleries")
+      console.log("logout", this.$store.getters.getIsAuthenticated)
+    }
+  }
 }
 </script>
 

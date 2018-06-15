@@ -11,7 +11,7 @@
               <router-link :to="{name: 'gallery', params: {id: gallery.id}}">{{ gallery.title }}</router-link>
             </h4>
             <p>Author:
-              <router-link to="#">{{ gallery.user.first_name }} {{ gallery.user.last_name }}</router-link>
+              <router-link :to="{name: 'author-galleries', params: {id: gallery.user.id}}">{{ gallery.user.first_name }} {{ gallery.user.last_name }}</router-link>
             </p>
             <p>
               <small>Created at</small> {{ gallery.created_at }}
