@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     loadMore() {
-      console.log('store', this.getCount)
+      console.log('store', this.getIsAuthenticated)
       GalleryService.getAllGalleries(this.page + 1)
         .then((response) => {
           console.log('more', response.data.data)
@@ -55,7 +55,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getCount'])
+    ...mapGetters(['getIsAuthenticated'])
   },
   created() {
     
@@ -68,6 +68,9 @@ export default {
           this.page = response.data.current_page
           this.showGalleries = true
         }        
+      })
+      .catch((err) => {
+        cosole.log(err)
       })
       
   }

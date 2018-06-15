@@ -44,13 +44,14 @@ export default {
           this.errMessage = ""
           //console.log("before push")
           this.$router.push({ name: "galleries" })
-          this.$eventHub.$emit("user-loged-in", authService.isAuthenticated())
+          //this.$eventHub.$emit("user-loged-in", authService.isAuthenticated())
           //console.log("after push")
         })
         .catch(err => {
-          let error = err.response.data.error.split("_").join(" ")
-          this.errMessage = error
-          //console.log("EE", err.response.data.error)
+         // console.log('err', err)
+          // let error = err.response.data.error.split("_").join(" ")
+          // this.errMessage = error
+          console.log("EE", err)
         })
     }
   }

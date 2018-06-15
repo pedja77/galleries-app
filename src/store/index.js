@@ -6,13 +6,13 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   state: {
-    count: 42
+    isAuthenticated: false
     // searchTerm: "",
     // movies: []
   },
   getters: {
-    getCount(state) {
-      return state.count
+    getIsAuthenticated(state) {
+      return state.isAuthenticated
     }
     // getSearchTerm(state) {
     //   return state.searchTerm
@@ -22,6 +22,9 @@ export const store = new Vuex.Store({
     // }
   },
   mutations: {
+    setIsAuthenticated(state, value) {
+      state.isAuthenticated = value
+    }
     // setSearchTerm(state, searchTerm) {
     //   state.searchTerm = searchTerm
     // },

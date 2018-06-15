@@ -1,5 +1,5 @@
 import axios from "axios"
-//import { authStore } from "../store/authStore.js"
+import { store } from "../store"
 
 axios.defaults.baseURL = "http://localhost:8000/api"
 //axios.defaults.headers.common = { "Access - Control - Allow - Origin": " *" }
@@ -15,7 +15,7 @@ export default class AuthService {
         console.log("login", response.data) // eslint-disable-line
         window.localStorage.setItem("loginToken", response.data.token)
         this.setAxiosDefaultAuthorizationHeader()
-        //authStore.setIsAuthenticated(true)
+        store.commit("setIsAuthenticated", true)
       })
   }
 
@@ -27,6 +27,7 @@ export default class AuthService {
   logout() {
     window.localStorage.removeItem("loginToken")
     delete axios.defaults.headers.common["Authorization"]
+    store.setIsAuthenticated(false)
   }
 
   isAuthenticated() {
