@@ -8,8 +8,11 @@
 
     <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
       <div class="carousel-inner">
-        <div class="carousel-item active" v-for="(image, index) in gallery.gallery_items" :key="index">
-          <img class="d-block w-100" :src="image.image_link">
+        <div class="carousel-item active">
+          <a :href="gallery.gallery_items[0].image_link" target="_blank"><img class="d-block w-100" :src="gallery.gallery_items[0].image_link"></a>
+        </div>
+        <div class="carousel-item" v-for="(image, index) in gallery.gallery_items.slice(1)" :key="index">
+          <a :href="image.image_link" target="_blank"><img class="d-block w-100" :src="image.image_link"></a>
         </div>
 
       </div>
@@ -47,6 +50,7 @@ export default {
         this.gallery = response.data
         console.log('g', this.gallery)
       })
+    console.log(this.gallery)
   }
 
 }
