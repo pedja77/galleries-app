@@ -32,9 +32,6 @@ export default {
   },
   computed: {
     ...mapGetters(['getIsAuthenticated']),
-    isAuthenticated() {
-      return authService.isAuthenticated()
-    }
   },
   created() {
     if(window.localStorage.getItem('loginToken')) {
