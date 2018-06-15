@@ -6,6 +6,7 @@ import AppLogin from "../pages/AppLogin.vue"
 import AppRegister from "../pages/AppRegister.vue"
 import AppGallery from "../pages/AppGallery.vue"
 import UserGalleries from "../pages/UserGalleries.vue"
+import CreateGallery from "../pages/CreateGallery.vue"
 
 import { requiresAuth, guestOnly } from "./guards"
 
@@ -33,6 +34,11 @@ const router = new VueRouter({
       meta: {
         guestOnly: true
       }
+    },
+    {
+      path: "/create",
+      component: CreateGallery,
+      name: "create"
     },
     {
       path: "/authors/:id",
