@@ -13,11 +13,11 @@
         </div>
 
       </div>
-      <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev" @cick="incCurrentIndex">
+      <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev" @click.prevent="incCurrentIndex">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
       </a>
-      <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next" @click="decCurrentIndex">
+      <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next" @click.prevent="decCurrentIndex">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       </a>

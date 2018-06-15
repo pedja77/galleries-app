@@ -29,7 +29,8 @@
 
 <script>
 import { GalleryService } from '../services/GalleryService.js'
-import moment from 'moment'
+//import moment from 'moment'
+import { mapGetters } from "vuex"
 
 export default {
   data() {
@@ -42,6 +43,7 @@ export default {
   },
   methods: {
     loadMore() {
+      console.log('store', this.getCount)
       GalleryService.getAllGalleries(this.page + 1)
         .then((response) => {
           console.log('more', response.data.data)
@@ -52,7 +54,11 @@ export default {
         })
     }
   },
+  computed: {
+    ...mapGetters(['getCount'])
+  },
   created() {
+    
     GalleryService.getAllGalleries()
       .then((response) => {
         if (response.data.data) {
@@ -61,9 +67,9 @@ export default {
           this.nextPageUrl = response.data.next_page_url
           this.page = response.data.current_page
           this.showGalleries = true
-        }
-        
+        }        
       })
+      
   }
 }
 </script>

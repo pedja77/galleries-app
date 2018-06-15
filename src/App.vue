@@ -13,6 +13,8 @@ import NavBar from './components/NavBar.vue'
 import GalleriesApp from './pages/GalleriesApp.vue'
 import AppLogin from './pages/AppLogin.vue'
 import AppRegister from './pages/AppRegister.vue'
+import NavReg from './components/NavReg.vue'
+
 
 export default {
   name: 'app',
@@ -20,7 +22,9 @@ export default {
     NavBar,
     GalleriesApp,
     AppLogin,
-    AppRegister
+    AppRegister,
+    NavReg
+    
   }
 }
 </script>
