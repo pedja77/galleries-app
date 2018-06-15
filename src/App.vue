@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <nav-bar />
+    <nav-bar v-if="!getIsAuthenticated" />
+    <nav-reg v-else />
     <div class="container mt-4">
       <router-view></router-view>
     </div>
@@ -15,6 +16,8 @@ import AppLogin from './pages/AppLogin.vue'
 import AppRegister from './pages/AppRegister.vue'
 import NavReg from './components/NavReg.vue'
 
+import { mapGetters } from 'vuex'
+
 
 export default {
   name: 'app',
@@ -25,7 +28,11 @@ export default {
     AppRegister,
     NavReg
     
+  },
+  computed: {
+    ...mapGetters(['getIsAuthenticated'])
   }
+
 }
 </script>
 

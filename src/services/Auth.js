@@ -27,7 +27,7 @@ export default class AuthService {
   logout() {
     window.localStorage.removeItem("loginToken")
     delete axios.defaults.headers.common["Authorization"]
-    store.setIsAuthenticated(false)
+    store.commit("setIsAuthenticated", false)
   }
 
   isAuthenticated() {
@@ -35,7 +35,11 @@ export default class AuthService {
   }
 
   register(newUser) {
-    return axios.post("/register", newUser)
+    return axios.post("/register", newUser).then(response => {
+      window.localStorage.setItem("loginToken", response.data.token)
+      this.setAxiosDefaultAuthorizationHeader()
+      store.commit("setIsAuthenticated", true)
+    })
   }
 }
 
