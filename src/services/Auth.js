@@ -14,6 +14,7 @@ export default class AuthService {
       .then(response => {
         console.log("login", response.data) // eslint-disable-line
         window.localStorage.setItem("loginToken", response.data.token)
+        window.localStorage.setItem("loggedUserId", response.data.user.id)
         this.setAxiosDefaultAuthorizationHeader()
         store.commit("setIsAuthenticated", true)
       })
@@ -26,6 +27,7 @@ export default class AuthService {
 
   logout() {
     window.localStorage.removeItem("loginToken")
+    window.localStorage.removeItem("loggedUserId")
     delete axios.defaults.headers.common["Authorization"]
     store.commit("setIsAuthenticated", false)
   }
@@ -37,6 +39,7 @@ export default class AuthService {
   register(newUser) {
     return axios.post("/register", newUser).then(response => {
       window.localStorage.setItem("loginToken", response.data.token)
+      window.localStorage.setItem("loggedUserId")
       this.setAxiosDefaultAuthorizationHeader()
       store.commit("setIsAuthenticated", true)
     })
