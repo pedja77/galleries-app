@@ -16,6 +16,7 @@ import AppLogin from './pages/AppLogin.vue'
 import AppRegister from './pages/AppRegister.vue'
 import NavReg from './components/NavReg.vue'
 import CreateGallery from './pages/CreateGallery.vue'
+import MyGalleries from './pages/MyGalleries.vue'
 
 import { mapGetters } from 'vuex'
 import { authService } from "./services/Auth.js"
@@ -29,7 +30,8 @@ export default {
     AppLogin,
     AppRegister,
     NavReg,
-    CreateGallery
+    CreateGallery,
+    MyGalleries
     
   },
   computed: {

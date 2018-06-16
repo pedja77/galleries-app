@@ -7,6 +7,7 @@ import AppRegister from "../pages/AppRegister.vue"
 import AppGallery from "../pages/AppGallery.vue"
 import UserGalleries from "../pages/UserGalleries.vue"
 import CreateGallery from "../pages/CreateGallery.vue"
+import MyGalleries from "../pages/MyGalleries.vue"
 
 import { requiresAuth, guestOnly } from "./guards"
 
@@ -26,6 +27,11 @@ const router = new VueRouter({
       // meta: {
       //   requiresAuth: true
       // }
+    },
+    {
+      path: "/my-galleries",
+      component: MyGalleries,
+      name: "my-galleries"
     },
     {
       path: "/login",

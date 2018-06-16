@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <router-link class="nav-item nav-link" to="/galleries">All Galleries</router-link>
-        <router-link class="nav-item nav-link" to="#">My Galleries</router-link>
+        <router-link class="nav-item nav-link" to="/my-galleries">My Galleries</router-link>
         <router-link class="nav-item nav-link" :to="{name: 'create'}">Create New Gallery</router-link>
         <a class="nav-item nav-link" href="#" @click="logout">Logout</a>
       </div>

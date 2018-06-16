@@ -52,7 +52,8 @@ export default {
   methods: {
     loadMore() {
       console.log('store', this.getIsAuthenticated)
-      GalleryService.getAllGalleries({page: this.page + 1})
+      this.params.page = this.page + 1
+      GalleryService.getAllGalleries(this.params)
         .then((response) => {
           console.log('more', response.data.data)
           this.galleries = this.galleries.concat(response.data.data)
@@ -77,7 +78,8 @@ export default {
     //     id: this.$route.params.id
     //   }
     // }
-    GalleryService.getAllGalleries()
+    this.params.id = window.localStorage.getItem('loggedUserId')
+    GalleryService.getAllGalleries(this.params)
       .then((response) => {
         if (response.data.data) {
           console.log(response.data.data)
@@ -96,5 +98,6 @@ export default {
   }
 }
 </script>
+
 
 

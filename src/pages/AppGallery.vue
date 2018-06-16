@@ -6,7 +6,7 @@
     </p>
     <p>{{ gallery.description }}</p>
 
-    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel" interval="2000">
       <div class="carousel-inner">
         <div class="carousel-item active">
           <a :href="gallery.gallery_items[0].image_link" target="_blank"><img class="d-block w-100" :src="gallery.gallery_items[0].image_link"></a>

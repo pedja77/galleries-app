@@ -7,8 +7,8 @@ class GalleryService {
     })
   }
 
-  getAllGalleries(page = "") {
-    return this.client.get(`/galleries?page=${page}`)
+  getAllGalleries(params) {
+    return this.client.get("/galleries", { params })
   }
 
   getGallery(id) {
