@@ -1,6 +1,10 @@
 <template>
   <div>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"> -->
+
+    <div class="alert alert-danger" role="alert" v-if="showError">
+      Invalid email or password.
+    </div>
 
     <form @submit.prevent="login">
       <div class="form-group row">
@@ -33,7 +37,8 @@ export default {
       credentials: {
         email: '',
         password: ''
-      }
+      },
+      showError: false
     }
   },
   methods: {
@@ -41,17 +46,13 @@ export default {
       authService
         .login(this.credentials.email, this.credentials.password)
         .then(() => {
-          this.errMessage = ""
-          //console.log("before push")
+          this.showError = false
           this.$router.push({ name: "galleries" })
           //this.$eventHub.$emit("user-loged-in", authService.isAuthenticated())
-          //console.log("after push")
         })
         .catch(err => {
-         // console.log('err', err)
-          // let error = err.response.data.error.split("_").join(" ")
-          // this.errMessage = error
-          console.log("EE", err)
+          console.log("EE", err.response)
+          this.showError = true
         })
     }
   }

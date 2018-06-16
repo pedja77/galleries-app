@@ -39,7 +39,7 @@ export default class AuthService {
   register(newUser) {
     return axios.post("/register", newUser).then(response => {
       window.localStorage.setItem("loginToken", response.data.token)
-      window.localStorage.setItem("loggedUserId")
+      window.localStorage.setItem("loggedUserId", response.data.user.id)
       this.setAxiosDefaultAuthorizationHeader()
       store.commit("setIsAuthenticated", true)
     })

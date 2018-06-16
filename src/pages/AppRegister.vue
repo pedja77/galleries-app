@@ -54,9 +54,13 @@
         </div>
       </div>
 
-      <label><input type="checkbox" v-model="user.accepted_terms" true-value="1" false-value="0">Accept Terms and Conditions</label>
-      <div class="alert alert-danger" v-if="errors.accepted_terms">
-        <p v-for="(err, index) in errors.accepted_terms" :key="index">{{ err }}</p>
+      <div class="form-group row">
+        <div class="offset-4 col-8">
+          <label><input type="checkbox" v-model="user.accepted_terms" true-value="1" false-value="0">Accept Terms and Conditions</label>
+          <div class="alert alert-danger" v-if="errors.accepted_terms">
+            <p v-for="(err, index) in errors.accepted_terms" :key="index">{{ err }}</p>
+          </div>
+        </div>
       </div>
 
       <div class="form-group row">
@@ -76,26 +80,76 @@ export default {
     return {
       user: {
         first_name: "",
-        last_name: '',
+        last_name: "",
         email: "",
         password: "",
         password_confirmation: "",
         accepted_terms: 0
       },
-      errors: {}
+      errors: {},
+      //showErrors: false
     }
   },
   methods: {
     register() {
-      authService
+      if (this.validateForm()) {
+        //this.showErrors = false
+        authService
         .register(this.user)
         .then(() => {
           this.$router.push({ name: "galleries" })
         })
         .catch(err => {
-          console.log(err.response.data)
-          this.errors = err.response.data
+          if (err instanceof TypeError) {
+            console.log(err)
+          } else {
+            console.log(err.response.data)
+            this.errors = err.response.data
+          }
         })
+      } else {
+        //this.showErrors = true
+        console.log(this.errors)
+      }
+      
+    },
+    validateForm() {
+      
+      const validateEmail = (email) => {
+        let re = /^\S+@\S+[\.][0-9a-z]+$/
+        return re.test(email);
+      }
+
+      let isFormValid = true
+      let errors = {}
+
+      if (!this.user.first_name) {
+        errors.first_name = ["First name is required"]
+        isFormValid = false
+      }
+      if (!this.user.last_name) {
+        errors.last_name = ["Last name is reqiured"]
+        isFormValid = false
+      }
+      if (!validateEmail(this.user.email)) {
+        errors.email = ["This field must be valid email"]
+        isFormValid = false
+      }
+      if (this.user.password != this.user.password_confirmation) {
+        errors.password = ["Password and password confirmation does't match"]
+        isFormValid = false
+      }
+      if (!/[0-9a-zA-Z]{8,}/.test(this.user.password)) {
+        errors.password = ["Password must be at least 8 characters long and contain at least one digit"]
+        isFormValid = false
+      }
+      if (this.user.accepted_terms == 0) {
+        errors.accepted_terms = ["You must accept terms and conditions to register"]
+        isFormValid = false
+      }
+      this.errors = errors
+      return isFormValid
+
     }
   }
 }
