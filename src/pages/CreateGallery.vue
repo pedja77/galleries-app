@@ -1,17 +1,23 @@
 <template>
   <div>
 
-    <form>
+    <form @submit.prevent="submit">
       <div class="form-group row">
         <label for="text" class="col-4 col-form-label">Gallery title:</label>
         <div class="col-8">
-          <input id="text" name="text" placeholder="Gallery title..." type="text" class="form-control here">
+          <input id="text" name="text" placeholder="Gallery title..." type="text" class="form-control here" v-model="gallery.title">
+          <div class="alert alert-danger" v-if="errors.title">
+            <p v-for="(err, index) in errors.title" :key="index">{{ err }}</p>
+          </div>
         </div>
       </div>
       <div class="form-group row">
         <label for="textarea" class="col-4 col-form-label">Gallery description:</label>
         <div class="col-8">
-          <textarea id="textarea" name="textarea" cols="40" rows="5" class="form-control"></textarea>
+          <textarea id="textarea" name="textarea" cols="40" rows="5" class="form-control" v-model="gallery.description"></textarea>
+          <div class="alert alert-danger" v-if="errors.description">
+            <p v-for="(err, index) in errors.description" :key="index">{{ err }}</p>
+          </div>
         </div>
       </div>
       <div class="form-group row" v-for="(url, index) in urls" :key="index">
@@ -43,10 +49,16 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {
-      urls: ['']
+      gallery: {
+        title: '',
+        description: ''
+      },
+      urls: [''],
+      errors: {}
     }
   },
   computed: {
@@ -55,6 +67,27 @@ export default {
     }
   },
   methods: {
+    validateForm() {
+      let isFormValid = true
+      let errors= {}
+      if (this.gallery.title.length < 2 || this.gallery.title.length > 255) {
+        errors.title = ['Title must have minumum 2 and maximum 255 characters']
+        isFormValid = false
+      }
+      if (this.gallery.description.length > 1000) {
+        errors.description = ['Description too long. Please restrain yourself to "only" 1000 characters']
+        isFormValid = false
+      }
+      this.errors = errors
+      return isFormValid
+    },
+    submit() {
+      if (this.validateForm()) {
+        console.log('form valid')
+      } else {
+        return
+      }
+    },
     addUrl() {
       this.urls.push('')
     },
