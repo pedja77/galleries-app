@@ -91,7 +91,7 @@ export default {
         }        
       })
       .catch((err) => {
-        cosole.log(err)
+        console.log(err)
       })
       console.log('route name', this.$route.name)
       

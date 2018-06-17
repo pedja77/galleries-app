@@ -2,7 +2,7 @@ import axios from "axios"
 import { store } from "../store"
 
 axios.defaults.baseURL = "http://localhost:8000/api"
-//axios.defaults.headers.common = { "Access - Control - Allow - Origin": " *" }
+//axios.defaults.headers.common = { "Access-Control-Allow-Origin": "*" }
 
 export default class AuthService {
   login(email, password) {

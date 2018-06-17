@@ -59,7 +59,8 @@ export default {
         description: ''
       },
       urls: [''],
-      errors: {}
+      errors: {},
+      id: null
     }
   },
   computed: {
@@ -69,7 +70,7 @@ export default {
   },
   methods: {
     cancel() {
-      this.$router.push({name: "my-galleries"})
+      this.$router.push({name: 'gallery', props: {id: this.id}})
     },
     validateForm() {
       let isFormValid = true
@@ -87,6 +88,7 @@ export default {
     },
     getGallery() {
       let gallery = {}
+      gallery.id = this.$route.params.id
       gallery.user_id = window.localStorage.getItem("loggedUserId")
       gallery.title = this.gallery.title
       gallery.description = this.gallery.description
@@ -103,14 +105,16 @@ export default {
       console.log(GalleryService)
       if (this.validateForm()) {
         console.log('form valid')
-        GalleryService.saveGallery(this.getGallery())
-          .then(response => {
-            console.log(response)
-            this.$router.push({name: 'my-galleries'})
-          })
-          .catch(err => {
-            this.errors = err.response.data
-          })
+        // GalleryService.editGallery(this.getGallery())
+        //   .then(response => {
+        //     console.log(response)
+        //     this.$router.push({name: 'gallery', props: {id: this.id}})
+        //   })
+        //   .catch(err => {
+        //     this.errors = err.response.data
+        //   })
+        console.log("Can't edit")
+        this.$router.push({name: 'gallery', props: {id: this.id}})
       } else {
         return
       }
@@ -142,6 +146,17 @@ export default {
         this.urls = newUrls
       }
     }
+  },
+  created() {
+    this.id = this.$route.params.id
+    GalleryService.getGallery(this.$route.params.id)
+      .then(response => {
+        this.gallery.title = response.data.gallery.title
+        this.gallery.description = response.data.gallery.description
+        this.urls = response.data.gallery.gallery_items.map(item => item.image_link)
+        console.log('edit',this.gallery)
+        console.log('edit', this.urls)
+      })
   }
 
 }
