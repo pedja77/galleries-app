@@ -135,7 +135,6 @@ export default {
         newUrls[index - 1] = temp
         this.urls = newUrls
       }
-      console.log('up', this.urls)
     },
     moveDown(index) {
       if (index < this.urls.length - 1) {
@@ -154,8 +153,6 @@ export default {
         this.gallery.title = response.data.gallery.title
         this.gallery.description = response.data.gallery.description
         this.urls = response.data.gallery.gallery_items.map(item => item.image_link)
-        console.log('edit',this.gallery)
-        console.log('edit', this.urls)
       })
   }
 

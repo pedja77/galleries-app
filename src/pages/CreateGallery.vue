@@ -100,12 +100,9 @@ export default {
       return gallery
     },
     submit() {
-      console.log(GalleryService)
       if (this.validateForm()) {
-        console.log('form valid')
         GalleryService.saveGallery(this.getGallery())
           .then(response => {
-            console.log(response)
             this.$router.push({name: 'my-galleries'})
           })
           .catch(err => {
@@ -131,7 +128,6 @@ export default {
         newUrls[index - 1] = temp
         this.urls = newUrls
       }
-      console.log('up', this.urls)
     },
     moveDown(index) {
       if (index < this.urls.length - 1) {

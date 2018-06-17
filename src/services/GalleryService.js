@@ -31,13 +31,9 @@ export default class GalleryService {
     return this.client.put("/galleries", gallery)
   }
 
-  // addMovie(movie) {
-  //   return this.client.post("/movies", movie)
-  // }
-
-  // getMovie(id) {
-  //   return this.client.get(`/movies/${id}`)
-  // }
+  deleteGallery(id) {
+    return this.client.delete(`/galleries/${id}`)
+  }
 }
 
 const galleryService = new GalleryService()

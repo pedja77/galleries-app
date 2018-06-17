@@ -25,19 +25,22 @@ const router = new VueRouter({
       path: "/galleries",
       component: GalleriesApp,
       name: "galleries"
-      // meta: {
-      //   requiresAuth: true
-      // }
     },
     {
       path: "/my-galleries",
       component: MyGalleries,
-      name: "my-galleries"
+      name: "my-galleries",
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/edit-gallery/:id",
       component: EditGallery,
-      name: "edit-gallery"
+      name: "edit-gallery",
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/login",
@@ -50,21 +53,16 @@ const router = new VueRouter({
     {
       path: "/create",
       component: CreateGallery,
-      name: "create"
+      name: "create",
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/authors/:id",
       component: UserGalleries,
       name: "author-galleries"
     },
-    // {
-    //   path: "/add",
-    //   component: AddMovie,
-    //   name: "add-movie",
-    //   meta: {
-    //     requiresAuth: true
-    //   }
-    // },
     {
       path: "/register",
       component: AppRegister,
@@ -77,9 +75,6 @@ const router = new VueRouter({
       path: "/galleries/:id",
       component: AppGallery,
       name: "gallery"
-      // meta: {
-      //   requiresAuth: true
-      // }
     }
   ]
 })

@@ -25,6 +25,11 @@
         <span class="sr-only">Next</span>
       </a>
     </div>
+
+    <div v-if="showDeleteGallery">
+      <button class="btn btn-danger" @click="deleteGallery">Delete this gallery</button>
+    </div>
+
     <div>
       <h3>Comments</h3>
       <ul class="list-unstyled">
@@ -74,14 +79,27 @@ export default {
   },
   computed: {
     ...mapGetters(['getIsAuthenticated']),
+    showDeleteGallery() {
+      return this.gallery.gallery.user_id == window.localStorage.getItem("loggedUserId")
+    }
   },
   methods: {
+    deleteGallery() {
+      if (confirm('Do you really need to delete this gallery?')) {
+        // GalleryService.deleteGallery(this.gallery.gallery.id)
+        //   .then(() => {
+        //     console.log('Gallery deleted')
+        //     this.$router.push({name: 'my-galleries'})
+        //   })
+        console.log('Gallery deleted')
+        this.$router.push({name: 'my-galleries'})
+      }
+      
+    },
     getGallery() {
       GalleryService.getGallery(this.$route.params.id)
       .then((response) => {
-        console.log(response.data)
         this.gallery = response.data
-        console.log('g', this.gallery)
       })
     },
     deleteComment(id) {

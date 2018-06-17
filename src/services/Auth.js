@@ -2,7 +2,6 @@ import axios from "axios"
 import { store } from "../store"
 
 axios.defaults.baseURL = "http://localhost:8000/api"
-//axios.defaults.headers.common = { "Access-Control-Allow-Origin": "*" }
 
 export default class AuthService {
   login(email, password) {
@@ -12,7 +11,6 @@ export default class AuthService {
         password
       })
       .then(response => {
-        console.log("login", response.data) // eslint-disable-line
         window.localStorage.setItem("loginToken", response.data.token)
         window.localStorage.setItem("loggedUserId", response.data.user.id)
         this.setAxiosDefaultAuthorizationHeader()

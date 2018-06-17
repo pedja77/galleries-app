@@ -3,7 +3,6 @@ import { authService } from "../services/Auth"
 export function requiresAuth(to) {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!authService.isAuthenticated()) {
-      //return (window.location.href = "/login")
       return Promise.reject({ name: "login" })
     }
 

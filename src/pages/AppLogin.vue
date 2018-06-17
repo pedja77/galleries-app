@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"> -->
 
     <div class="alert alert-danger" role="alert" v-if="showError">
       Invalid email or password.
@@ -16,7 +15,7 @@
       <div class="form-group row">
         <label for="password" class="col-4 col-form-label">Password:</label>
         <div class="col-8">
-          <input id="password" name="password" placeholder="Password" type="text" class="form-control here" v-model="credentials.password">
+          <input id="password" name="password" placeholder="Password" type="password" class="form-control here" v-model="credentials.password">
         </div>
       </div>
       <div class="form-group row">
@@ -48,10 +47,9 @@ export default {
         .then(() => {
           this.showError = false
           this.$router.push({ name: "galleries" })
-          //this.$eventHub.$emit("user-loged-in", authService.isAuthenticated())
+          
         })
         .catch(err => {
-          console.log("EE", err.response)
           this.showError = true
         })
     }

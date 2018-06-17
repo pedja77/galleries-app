@@ -29,15 +29,12 @@
 </template>
 
 <script>
-//import GalleriesList from '../components/GalleriesList.vue'
-
 import { GalleryService } from '../services/GalleryService.js'
-//import moment from 'moment'
 import { mapGetters } from "vuex"
 
 export default {
   components: {
-    //GalleriesList
+    
   },
   data() {
     return {
@@ -46,12 +43,11 @@ export default {
       page: 1,
       showGalleries: false,
       params: {}
-      //userId: this.$route.params.id
+      
     }
   },
   methods: {
     loadMore() {
-      console.log('store', this.getIsAuthenticated)
       GalleryService.getAllGalleries({page: this.page + 1})
         .then((response) => {
           console.log('more', response.data.data)
@@ -60,23 +56,12 @@ export default {
           this.nextPageUrl = response.data.next_page_url
           this.page++
         })
-    },
-    // setRequestParams () {
-    //   if (this.$route.params.id) {
-    //     this.params.id = this.$route.params.id  // Get all galleries created by user
-    //   }
-    //   if (this.$route.name == '')
-    // }
+    }
   },
   computed: {
     ...mapGetters(['getIsAuthenticated'])
   },
   created() {
-    // if (this.$route.name == "author-galleries") {
-    //   this.params = {
-    //     id: this.$route.params.id
-    //   }
-    // }
     GalleryService.getAllGalleries()
       .then((response) => {
         if (response.data.data) {
@@ -85,13 +70,11 @@ export default {
           this.nextPageUrl = response.data.next_page_url
           this.page = response.data.current_page
           this.showGalleries = true
-          //console.log('more42', response.data.data)
         }        
       })
       .catch((err) => {
         cosole.log(err)
       })
-      console.log('route name', this.$route.name)
       
   }
 }

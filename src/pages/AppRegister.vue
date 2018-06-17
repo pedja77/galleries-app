@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"> -->
 
     <form @submit.prevent="register">
       <div class="form-group row">
@@ -87,13 +86,12 @@ export default {
         accepted_terms: 0
       },
       errors: {},
-      //showErrors: false
+      
     }
   },
   methods: {
     register() {
       if (this.validateForm()) {
-        //this.showErrors = false
         authService
         .register(this.user)
         .then(() => {
@@ -103,12 +101,10 @@ export default {
           if (err instanceof TypeError) {
             console.log(err)
           } else {
-            console.log(err.response.data)
             this.errors = err.response.data
           }
         })
       } else {
-        //this.showErrors = true
         console.log(this.errors)
       }
       
